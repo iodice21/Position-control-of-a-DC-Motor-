@@ -26,6 +26,28 @@ This project details the comprehensive design, dynamic simulation, and performan
 * **Reference Pre-Filtering:** Implementation of a first-order low-pass filter (tau = 0.5 s) on the position reference to smooth out sharp mathematical gradients, successfully preventing current saturation spikes and reducing thermal and mechanical stress on hardware[cite: 58, 59].
 * **Disturbance Rejection and Robustness Analysis:** Tested under nominal load torque steps (TL = 1 Nm) and severe parametric mismatch conditions (tripling the rotor moment of inertia, J_new = 3 * J_nom), proving the drive's fault tolerance and stability under degraded phase margin conditions[cite: 52, 55, 60].
 
+
+<a name="versione-italiana"></a>
+# Controllo in Cascata di Velocità e Posizione per Azionamento a Motore in CC
+
+Repository ufficiale per il progetto avanzato del corso di Advanced Electric Drives and Power Converter Systems (Laurea Magistrale in Digital Automation Engineering).
+
+* **Candidato:** Antonio Iodice (Matricola: 213260)
+* **Anno Accademico:** 2025/2026
+
+## Panoramica del Progetto
+Questo progetto descrive la progettazione completa, la simulazione dinamica e l'analisi delle prestazioni di un sistema di controllo in cascata per un azionamento a motore in CC, sviluppato all'interno dell'ambiente software PLECS. La metodologia adottata segue un'architettura a cascata bottom-up, partendo dall'anello interno di corrente, passando per l'anello intermedio di velocità e concludendo con l'anello esterno di posizione angolare.
+
+## Architettura di Controllo e Metodologia
+1. **Anello di Corrente (Regolatore PI):** Regola la corrente d'armatura e la coppia elettromagnetica. Tarato per ottenere un tempo di salita rapido e una larghezza di banda ad anello chiuso di 50 rad/s per un profondo disaccoppiamento in frequenza.
+2. **Anello di Velocità (Ottimo Simmetrico):** Regola la velocità meccanica utilizzando un regolatore PI ricavato analiticamente tramite il criterio dell'Ottimo Simmetrico, puntando a un margine di fase ottimale e imponendo rigidi limiti di saturazione di sicurezza della corrente (+/- 8.7 A).
+3. **Anello di Posizione (Regolatore Proporzionale):** Implementa un regolatore P esterno (Kp = 4) per tracciare la posizione angolare senza introdurre una seconda azione integrale destabilizzante, garantendo un transitorio a smorzamento critico.
+
+## Ottimizzazioni Avanzate e Robustezza
+* **Pre-filtraggio del Riferimento:** Introduzione di un filtro passa-basso del primo ordine (tau = 0.5 s) sul riferimento di posizione per smussare i gradienti netti, prevenendo con successo i picchi di saturazione della corrente e riducendo lo stress termico e meccanico sull'hardware.
+* **Reiezione dei Disturbi e Analisi di Robustezza:** Testato sotto gradini di coppia di carico nominale (TL = 1 Nm) e severe condizioni di disallineamento parametrico (triplicando il momento d'inerzia del rotore, J_new = 3 * J_nom), dimostrando la tolleranza ai guasti e la stabilità dell'azionamento anche in condizioni di ridotto margine di fase.
+
+
 ### Repository Structure
 ```text
 ├── docs/                # Technical project report (PDF)
