@@ -10,7 +10,7 @@ Cascaded control design for a DC Motor Drive in PLECS. Features an inner current
 ---
 
 <a name="english"></a>
-## 🇬🇧 English Version
+## English Version
 
 # Cascaded Position and Speed Control of a DC Motor Drive
 
@@ -30,6 +30,29 @@ This project details the comprehensive design, dynamic simulation, and performan
 ### Advanced Optimizations & Robustness
 * **Reference Pre-Filtering:** Implementation of a first-order low-pass filter ($\tau = 0.5\text{ s}$) on the position reference to smooth out sharp mathematical gradients, successfully preventing current saturation spikes and reducing thermal/mechanical stress on hardware.
 * **Disturbance Rejection & Robustness Analysis:** Tested under nominal load torque steps ($T_L = 1\text{ Nm}$) and severe parametric mismatch conditions (tripling the rotor moment of inertia, $J_{new} = 3 \cdot J_{nom}$), proving the drive's fault tolerance and stability under degraded phase margin conditions.
+
+
+# Controllo in Cascata di Velocità e Posizione per Azionamento a Motore in CC
+
+Repository ufficiale per il progetto avanzato del corso di **Advanced Electric Drives and Power Converter Systems** (Laurea Magistrale in Digital Automation Engineering).
+
+* **Candidato:** Antonio Iodice (Matricola: 213260)[cite: 47]
+* **Anno Accademico:** 2025/2026[cite: 47]
+
+---
+
+## Panoramica del Progetto
+Questo progetto descrive la progettazione completa, la simulazione dinamica e l'analisi delle prestazioni di un sistema di controllo in cascata per un azionamento a motore in CC, sviluppato all'interno dell'ambiente software **PLECS**[cite: 48]. La metodologia adottata segue un'architettura a cascata *bottom-up*, partendo dall'anello interno di corrente, passando per l'anello intermedio di velocità e concludendo con l'anello esterno di posizione angolare[cite: 48].
+
+## Architettura di Controllo e Metodologia
+1. **Anello di Corrente (Regolatore PI):** Regola la corrente d'armatura e la coppia elettromagnetica[cite: 50, 51]. Tarato per ottenere un tempo di salita rapido ($\approx 1\text{ ms}$) e una larghezza di banda ad anello chiuso di $50\text{ rad/s}$ per un profondo disaccoppiamento in frequenza[cite: 51].
+2. **Anello di Velocità (Ottimo Simmetrico):** Regola la velocità meccanica utilizzando un regolatore PI ricavato analiticamente tramite il criterio dell'Ottimo Simmetrico, puntando a un margine di fase ottimale ($\approx 54.9^\circ$) e imponendo rigidi limiti di saturazione di sicurezza della corrente ($\pm 8.7\text{ A}$)[cite: 52, 53].
+3. **Anello di Posizione (Regolatore Proporzionale):** Implementa un regolatore P esterno ($K_p = 4$) per tracciare la posizione angolare senza introdurre una seconda azione integrale destabilizzante, garantendo un transitorio a smorzamento critico[cite: 54, 55].
+
+## Ottimizzazioni Avanzate e Robustezza
+* **Pre-filtraggio del Riferimento:** Introduzione di un filtro passa-basso del primo ordine ($\tau = 0.5\text{ s}$) sul riferimento di posizione per smussare i gradienti netti, prevenendo con successo i picchi di saturazione della corrente e riducendo lo stress termico e meccanico sull'hardware[cite: 58, 59].
+* **Reiezione dei Disturbi e Analisi di Robustezza:** Testato sotto gradini di coppia di carico nominale ($T_L = 1\text{ Nm}$) e severe condizioni di disallineamento parametrico (triplicando il momento d'inerzia del rotore, $J_{new} = 3 \cdot J_{nom}$), dimostrando la tolleranza ai guasti e la stabilità dell'azionamento anche in condizioni di ridotto margine di fase[cite: 52, 55, 60].
+
 
 ### Repository Structure
 ```text
